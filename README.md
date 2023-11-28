@@ -1,6 +1,11 @@
 # XMLParser
-
 A XMLParser that parses a XML string into similar AST.
+
+## Guide
+>[Install](#Install) <br>
+>[Usage](#Usage) <br>
+>[API](#API) <br>
+>[Maintainers](#Maintainers) <br>
 
 ## Install
 
@@ -171,9 +176,9 @@ print(Text == XML:GenerateXMLFromTree(Tree)) -- true
 
 ```
 
-
 ## API
-
 **`XML:GenerateTreeFromXML(XML: string)` `-> XML_AST: {}`** <br/>
 **`XML:GenerateXMLFromTree(XML_AST: {})` `-> XML: string`** <br/>
 
+## Maintainers
+- [Perth](https://github.com/Perthys) | `Perthys#0`
