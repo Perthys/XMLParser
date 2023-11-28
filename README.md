@@ -1,6 +1,7 @@
 # XMLParser
 A intuitive XMLParser entirely implemented in LuaU <br>
-Parses a XML strings into similar AST <br>
+Parses XML strings into similar AST <br>
+Also Parses AST back into XML <br>
 
 ## Guide
 >[Supports](#Supports) <br>
