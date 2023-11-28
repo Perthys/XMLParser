@@ -251,6 +251,7 @@ local function GenerateTreeFromXML(self, String)
 	while (true) do 
 		local CurrentCharacter = String:sub(CurrentNodeIndex, CurrentNodeIndex)
 		local IsSequenceStarter = CurrentCharacter == "<"
+		local IsSequenceEnder = CurrentCharacter == ">"
 
 		if IsSequenceStarter and not CurrentIsGettingSequence and CurrentSequence ~= "" then
 			CurrentIsGettingSequence = true
@@ -275,7 +276,7 @@ local function GenerateTreeFromXML(self, String)
 
 		CurrentSequence ..= CurrentCharacter;
 
-		local TagType = SequenceIsATag(CurrentSequence)
+		local TagType = IsSequenceEnder and SequenceIsATag(CurrentSequence)
 
 		if TagType then
 			CurrentIsGettingSequence = false
