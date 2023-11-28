@@ -205,9 +205,4 @@ local function GenerateTreeRecursive(String)
 	return Tree
 end
 
-local Prolog = `<?xml version="1.0" encoding="UTF-8"?>`
-local Comment = `<!--- text --->`
-local Single = `<image ImageID="rbxassetid://15102015050" OtherArgument="test"/>`
-local String = Prolog..Comment..Single..`<bold><font size="40"> test </font><font size="40"> test </font></bold>`..Single..Comment
-
-print(Dump(GenerateTreeRecursive(String)))
+return GenerateTreeRecursive
