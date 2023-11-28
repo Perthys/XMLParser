@@ -7,10 +7,6 @@ local function VerifyArrows(String)
 	return First == "<" and Last == ">"
 end
 
-local function ValidateSize(String, Size)
-	return #String == Size
-end
-
 local Validators; 
 
 Validators = {
