@@ -12,7 +12,7 @@ but parses xml into ast
 - Sequences probably dont need extra statements to return bools as they probably get casted to booleans on return anyway when checking in a equality statement (Remove If Statements) [ ]
 - Move the TAG_TYPE operation code into a table [ ]
 - Actually make this recursive instead of using a while loop [ ]
-
+- add a true linter instead of erroring [ ]
 
 ```lua
 local Prolog = `<?xml version="1.0" encoding="UTF-8"?>`
