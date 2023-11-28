@@ -1,11 +1,19 @@
 # XMLParser
-A XMLParser that parses a XML string into similar AST.
+A intuitive XMLParser entirely implemented in LuaU
+Parses a XML strings into similar AST
 
 ## Guide
+>[Supports](#Supports) <br>
 >[Install](#Install) <br>
 >[Usage](#Usage) <br>
 >[API](#API) <br>
 >[Maintainers](#Maintainers) <br>
+
+## Supports
+- Prologs
+- Tags
+- Singles
+- Comments
 
 ## Install
 
