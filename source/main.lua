@@ -7,6 +7,10 @@ local function VerifyArrows(String)
 	return First == "<" and Last == ">"
 end
 
+local function ValidateSize(String, Size)
+	return #String == Size
+end
+
 local Validators; 
 
 Validators = {
@@ -158,6 +162,16 @@ local function GetTagNameAndData(Type, String)
 
 	if (Extractor) then
 		return Extractor(String)
+	end
+end
+
+local function RemoveParentRecursive(Tree)
+	Tree.Parent = nil
+	local Children = Tree.Children
+
+	if (#Children == 0) then return end
+	for _, Child in (Tree.Children) do
+		RemoveParentRecursive(Child)
 	end
 end
 
@@ -318,6 +332,8 @@ local function GenerateTreeFromXML(self, String)
 		CurrentNodeIndex += 1
 	end
 
+	RemoveParentRecursive(Root)
+	
 	return Root;
 end
 
