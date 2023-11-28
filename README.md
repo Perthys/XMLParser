@@ -9,6 +9,9 @@ but parses xml into ast
 - Make code not look bad [ ]
 - Optimize code [ ]
 - Make Sequencer not use patterns [ ]
+- Sequences probably dont need extra statements to return bools as they probably get casted to booleans on return anyway when checking in a equality statement (Remove If Statements) [ ]
+- Move the TAG_TYPE operation code into a table [ ]
+- Actually make this recursive instead of using a while loop [ ]
 
 
 ```lua
