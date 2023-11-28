@@ -46,6 +46,11 @@ else
 end
 ```
 
+**Wally**
+```lua
+xmlparser = "perthys/xmlparser@1.0.1"
+```
+
 ## Usage
 
 **Example**
