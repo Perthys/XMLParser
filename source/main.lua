@@ -60,28 +60,28 @@ Validators = {
 	end;
 }
 
+local function ExtractAttributesAndStrings(String)
+	local Tag, Attributes = String:match("^(%S+)%s(.+)$")
+	if not Tag then return String, {} end
+
+	local AttributesTable = {}
+	local Pattern = '([^%s=]+)%s*=%s*"(.-)"'
+
+	for Attribute, Value in Attributes:gmatch(Pattern) do
+		table.insert(AttributesTable, {
+			Type = Attribute;
+			Value = `"{Value}"`;
+		})
+	end
+
+	return Tag, AttributesTable
+end
+
 local Extractors;
 Extractors = {
 	["START"] = function(String)
 		String = String:sub(2, #String - 1)
-
-		local Split = String:split(" ") or {}
-		local Tag = Split[1] or String
-
-		local Attributes = {}
-		if Split[1] then table.remove(Split, 1) end
-
-		for _, Attribute in (Split) do
-			local SplitAttribute = Attribute:split("=")
-
-			local AttributeName = SplitAttribute[1]
-			local AttributeValue = SplitAttribute[2]
-
-			table.insert(Attributes, {
-				Type = AttributeName;
-				Value = AttributeValue;
-			})
-		end
+		local Tag, Attributes = ExtractAttributesAndStrings(String)
 
 		return Tag, Attributes
 	end;
@@ -93,24 +93,7 @@ Extractors = {
 	["SINGLE"] = function(String)
 		String = String:sub(2, #String - 2)
 
-		local Split = String:split(" ") or {}
-		local Tag = Split[1] or String
-
-		local Attributes = {}
-
-		if Split[1] then table.remove(Split, 1) end;
-
-		for _, Attribute in (Split) do
-			local SplitAttribute = Attribute:split("=")
-
-			local AttributeName = SplitAttribute[1]
-			local AttributeValue = SplitAttribute[2]
-
-			table.insert(Attributes, {
-				Type = AttributeName;
-				Value = AttributeValue;
-			})
-		end
+		local Tag, Attributes = ExtractAttributesAndStrings(String)
 
 		return Tag, Attributes
 	end;
@@ -127,24 +110,7 @@ Extractors = {
 	["PROLOG"] = function(String)
 		String = String:sub(3, #String - 2)
 
-		local Split = String:split(" ") or {}
-		local Tag = Split[1] or String
-
-		local Attributes = {}
-
-		if Split[1] then table.remove(Split, 1) end;
-
-		for _, Attribute in (Split) do
-			local SplitAttribute = Attribute:split("=")
-
-			local AttributeName = SplitAttribute[1]
-			local AttributeValue = SplitAttribute[2]
-
-			table.insert(Attributes, {
-				Type = AttributeName;
-				Value = AttributeValue;
-			})
-		end
+		local Tag, Attributes = ExtractAttributesAndStrings(String)
 
 		return Tag, Attributes
 	end;
@@ -186,7 +152,7 @@ function Node.new(TagType, Data)
 	self.Children = Data.Children or {};
 	self.Parent = Data.Parent;
 	self.Type = Data.Type;
---	self.ID = HttpService:GenerateGUID(true) for debug visuals for cyclic tables
+	--	self.ID = HttpService:GenerateGUID(true) for debug visuals for cyclic tables
 
 	return self
 end
@@ -333,7 +299,7 @@ local function GenerateTreeFromXML(self, String)
 	end
 
 	RemoveParentRecursive(Root)
-	
+
 	return Root;
 end
 
