@@ -174,6 +174,6 @@ print(Text == XML:GenerateXMLFromTree(Tree)) -- true
 
 ## API
 
-**`XML:GenerateTreeFromXML(XML: string)`** `-> XML_AST: {}`
-**`XML:GenerateXMLFromTree(XML_AST: {})`** `-> XML: string`
+**`XML:GenerateTreeFromXML(XML: string)` `-> XML_AST: {}`** <br/>
+**`XML:GenerateXMLFromTree(XML_AST: {})` `-> XML: string`** <br/>
 
