@@ -5,6 +5,12 @@ awfully made xml parser probably can have like A MILLION optimizations
 but parses xml into ast
 
 
+## TODO:
+- Make code not look bad [ ]
+- Optimize code [ ]
+- Make Sequencer not use patterns [ ]
+
+
 ```lua
 local Prolog = `<?xml version="1.0" encoding="UTF-8"?>`
 local Comment = `<!--- text --->`
