@@ -59,7 +59,7 @@ print("Successfully installed XMLParser module. At:", XMLModule);
 
 **Wally**
 ```lua
-xmlparser = "perthys/xmlparser@1.0.1"
+xmlparser = "perthys/xmlparser@2.0.0"
 ```
 
 ## Usage
@@ -177,12 +177,12 @@ print(Text == XML:GenerateXMLFromTree(Tree)) -- true
 ## API
 **`XML:GenerateTreeFromXML(XML: string)` `-> XML_AST: {}`** <br/>
 **`XML:GenerateXMLFromTree(XML_AST: {})` `-> XML: string`** <br/>
-**`XML.Escape(Text: string)` `-> string`** — escapes `& < > " '` into entities <br/>
-**`XML.Unescape(Text: string)` `-> string`** — decodes `&amp; &lt; &gt; &quot; &apos; &#65; &#x41;` <br/>
+**`XML.Escape(Text: string)` `-> string`** - escapes `& < > " '` into entities <br/>
+**`XML.Unescape(Text: string)` `-> string`** - decodes `&amp; &lt; &gt; &quot; &apos; &#65; &#x41;` <br/>
 
 **Node methods** <br/>
-**`Node:GetAttribute(Name: string)` `-> string?`** — entity-decoded attribute value <br/>
-**`Node:GetText()` `-> string?`** — entity-decoded text of a `STRING`/`COMMENT` node (`Node.Text` keeps the raw source) <br/>
+**`Node:GetAttribute(Name: string)` `-> string?`** - entity-decoded attribute value <br/>
+**`Node:GetText()` `-> string?`** - entity-decoded text of a `STRING`/`COMMENT` node (`Node.Text` keeps the raw source) <br/>
 **`Node:GetChildren()` / `Node:AddChild(Node)` / `Node:RemoveChild(Node)`** <br/>
 
 ## Maintainers

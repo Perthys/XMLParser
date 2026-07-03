@@ -1,6 +1,6 @@
 [package]
 name = "perthys/xmlparser"
-version = "1.0.1"
+version = "2.0.0"
 registry = "https://github.com/UpliftGames/wally-index"
 realm = "shared"
 description = "A intuitive XMLParser entirely implemented in LuaU | https://github.com/Perthys/XMLParser"
@@ -15,6 +15,8 @@ exclude = [
     'contributing.md',
     'media',
     'old',
+    'sourcemap.json',
+    'HANDOFF.md',
 ]
 
 [dependencies]
