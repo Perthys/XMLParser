@@ -19,7 +19,7 @@ Also Parses AST back into XML <br>
 ## Install
 
 **Roblox Console**
-```lua
+```luau
 -- Run in Roblox Studio Console
 local HttpService = game:GetService("HttpService");
 local ReplicatedStorage = game:GetService("ReplicatedStorage");
@@ -65,7 +65,7 @@ xmlparser = "perthys/xmlparser@2.0.0"
 ## Usage
 
 **Example**
-```lua
+```luau
 local ReplicatedStorage = game:GetService("ReplicatedStorage");
 local XML = require(ReplicatedStorage:WaitForChild("XML"));
 
