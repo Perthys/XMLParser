@@ -95,7 +95,7 @@ local NewText = XML:GenerateXMLFromTree(Tree); print(NewText == Text) -- true
 
 **Example Output**
 
-```lua
+```luau
 local ReplicatedStorage = game:GetService("ReplicatedStorage");
 local XML = require(ReplicatedStorage:WaitForChild("XML"));
 
