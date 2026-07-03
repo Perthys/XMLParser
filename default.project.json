@@ -1,6 +1,6 @@
 {
     "name": "XML",
     "tree": {
-        "$path": "source"
+        "$path": "src"
     }
 }

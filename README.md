@@ -21,30 +21,40 @@ Also Parses AST back into XML <br>
 **Roblox Console**
 ```lua
 -- Run in Roblox Studio Console
-local HttpService = game:GetService("HttpService"); 
+local HttpService = game:GetService("HttpService");
 local ReplicatedStorage = game:GetService("ReplicatedStorage");
 local LastValue = HttpService.HttpEnabled
 
 HttpService.HttpEnabled = true
 
-local ChalkModule = Instance.new("ModuleScript");
-ChalkModule.Name = "XML";
-ChalkModule.Parent = ReplicatedStorage;
+local Base = "https://raw.githubusercontent.com/Perthys/XMLParser/main/src/"
+local Modules = { "init", "Entities", "Node", "Parser", "Serializer" }
 
-local Request = HttpService:RequestAsync({
-    Url = "https://raw.githubusercontent.com/Perthys/XMLParser/main/source/main.lua";
-    Method = "GET";
-});
+local XMLModule = Instance.new("ModuleScript");
+XMLModule.Name = "XML";
+
+for _, Name in (Modules) do
+    local Request = HttpService:RequestAsync({
+        Url = `{Base}{Name}.luau`;
+        Method = "GET";
+    });
+
+    local Success = Request.Success and Request.StatusCode == 200 if not Success then error(`Failed to install XMLParser module: {Name}`) end
+
+    if (Name == "init") then
+        XMLModule.Source = Request.Body
+    else
+        local Child = Instance.new("ModuleScript");
+        Child.Name = Name;
+        Child.Source = Request.Body;
+        Child.Parent = XMLModule;
+    end
+end
 
 HttpService.HttpEnabled = LastValue
 
-if Request.Success and Request.StatusCode == 200 then
-    ChalkModule.Source = Request.Body
-
-    print("Successfully installed XMLParser module. At:", ChalkModule);
-else
-    error("Failed to install XMLParser module.");
-end
+XMLModule.Parent = ReplicatedStorage;
+print("Successfully installed XMLParser module. At:", XMLModule);
 ```
 
 **Wally**
@@ -108,82 +118,56 @@ Text = `{Prolog}{Text}`
 Text = `{Comment}{Text}`
 
 local Tree = {
-    TagType = "ROOT",
+    Type = "ROOT",
     Attributes = {},
     Children = {
         {
-            TagType = "COMMENT",
-            Attributes = {
-                {
-                    Value = " text ",
-                    Type = "Comment"
-                }
-            },
-            Children = {},
-            Type = "COMMENT"
+            Type = "COMMENT",
+            Text = " text ",
+            Attributes = {},
+            Children = {}
         },
         {
+            Type = "PROLOG",
             TagType = "xml",
             Attributes = {
-                {
-                    Value = `"1.0"`,
-                    Type = "version"
-                },
-                {
-                    Value = `"UTF-8"`,
-                    Type = "encoding"
-                }
+                { Name = "version", Value = "1.0" },
+                { Name = "encoding", Value = "UTF-8" }
             },
-            Children = {},
-            Type = "PROLOG"
+            Children = {}
         },
         {
+            Type = "SINGLE",
             TagType = "image",
             Attributes = {
-                {
-                    Value = `"rbxassetid://15102015050"`,
-                    Type = "ImageID"
-                },
-                {
-                    Value = `"test"`,
-                    Type = "OtherArgument"
-                }
+                { Name = "ImageID", Value = "rbxassetid://15102015050" },
+                { Name = "OtherArgument", Value = "test" }
             },
-            Children = {},
-            Type = "SINGLE"
+            Children = {}
         },
         {
+            Type = "TAG",
             TagType = "font",
             Attributes = {
-                {
-                    Value = `"50"`,
-                    Type = "size"
-                }
+                { Name = "size", Value = "50" }
             },
             Children = {
                 {
+                    Type = "TAG",
                     TagType = "b",
                     Attributes = {},
                     Children = {
                         {
-                            TagType = "String",
-                            Attributes = {
-                                {
-                                    Value = "hello",
-                                    Type = "String"
-                                }
-                            },
-                            Children = {},
-                            Type = "STRING"
+                            Type = "STRING",
+                            Text = "hello",
+                            Attributes = {},
+                            Children = {}
                         }
-                    },
-                    Type = "TAG"
+                    }
                 }
-            },
-            Type = "TAG"
+            }
         }
-    },
-    Type = "ROOT"
+    }
 }
 
 print(Text == XML:GenerateXMLFromTree(Tree)) -- true
@@ -193,6 +177,13 @@ print(Text == XML:GenerateXMLFromTree(Tree)) -- true
 ## API
 **`XML:GenerateTreeFromXML(XML: string)` `-> XML_AST: {}`** <br/>
 **`XML:GenerateXMLFromTree(XML_AST: {})` `-> XML: string`** <br/>
+**`XML.Escape(Text: string)` `-> string`** — escapes `& < > " '` into entities <br/>
+**`XML.Unescape(Text: string)` `-> string`** — decodes `&amp; &lt; &gt; &quot; &apos; &#65; &#x41;` <br/>
+
+**Node methods** <br/>
+**`Node:GetAttribute(Name: string)` `-> string?`** — entity-decoded attribute value <br/>
+**`Node:GetText()` `-> string?`** — entity-decoded text of a `STRING`/`COMMENT` node (`Node.Text` keeps the raw source) <br/>
+**`Node:GetChildren()` / `Node:AddChild(Node)` / `Node:RemoveChild(Node)`** <br/>
 
 ## Maintainers
 - [Perth](https://github.com/Perthys) | `Perthys#0`

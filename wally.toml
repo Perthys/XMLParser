@@ -15,7 +15,6 @@ exclude = [
     'contributing.md',
     'media',
     'old',
-    "TestScripts",
 ]
 
 [dependencies]
