@@ -12,7 +12,7 @@ const QuestionByte: number = ("?"):byte()
 const SlashByte: number = ("/"):byte()
 const DashByte: number = ("-"):byte()
 
-local function FindTagEnd(String: string, Position: number): number?
+const function FindTagEnd(String: string, Position: number): number?
 	local Index: number? = String:find("[\"'>]", Position)
 
 	while (Index) do
@@ -26,7 +26,7 @@ local function FindTagEnd(String: string, Position: number): number?
 	return nil
 end
 
-local function ExtractTagAndAttributes(String: string): (string, { Attribute }?)
+const function ExtractTagAndAttributes(String: string): (string, { Attribute }?)
 	const HasWhitespace: number? = String:find("%s"); if not HasWhitespace then return String, nil end
 
 	const Tag: string?, AttributeText: string? = String:match("^%s*(%S+)%s*(.*)$")
@@ -45,7 +45,7 @@ local function ExtractTagAndAttributes(String: string): (string, { Attribute }?)
 	return Tag, Attributes
 end
 
-local function GenerateTreeFromXML(self: unknown, Source: string?): Node
+const function GenerateTreeFromXML(self: unknown, Source: string?): Node
 	const String: unknown = if Source == nil then self else Source
 
 	if (typeof(String) ~= "string") then error("GenerateTreeFromXML expects a string") end

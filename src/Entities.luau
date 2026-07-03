@@ -18,13 +18,13 @@ const UnescapeMap: { [string]: string } = {
 	["apos"] = "'";
 }
 
-local function Escape(String: string): string
+const function Escape(String: string): string
 	const Escaped: string = String:gsub("[&<>\"']", EscapeMap)
 
 	return Escaped
 end
 
-local function Unescape(String: string): string
+const function Unescape(String: string): string
 	const Unescaped: string = String:gsub("&(#?x?%w+);", function(Entity: string): string
 		const Named: string? = UnescapeMap[Entity]; if Named then return Named end
 
