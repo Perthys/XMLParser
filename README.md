@@ -27,7 +27,7 @@ local LastValue = HttpService.HttpEnabled
 
 HttpService.HttpEnabled = true
 
-local Base = "https://raw.githubusercontent.com/Perthys/XMLParser/main/src/"
+local Base = "https://raw.githubusercontent.com/Perthys/xml-parser/main/src/"
 local Modules = { "init", "Entities", "Node", "Parser", "Serializer" }
 
 local XMLModule = Instance.new("ModuleScript");
